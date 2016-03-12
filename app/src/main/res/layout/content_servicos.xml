@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_servicos"
+    tools:context=".Activities.ServicosActivity">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/cbColoracao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escova"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbCorteMasculino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Corte Masculino"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbCorteFeminino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Corte Feminino"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbDesignDeSobrancelhas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Design de Sobrancelhas"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbEscova"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escova"
+            android:onClick="onCheckboxClicked"/>
+
+        <CheckBox
+            android:id="@+id/cbMaquiagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maquiagem"
+            android:onClick="onCheckboxClicked"/>
+
+    </GridLayout>
+
+
+</LinearLayout>
