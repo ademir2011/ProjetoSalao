@@ -116,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
                 .withTranslucentStatusBar(true)
                 .withActionBarDrawerToggle(true)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Serviços"),
+                        new PrimaryDrawerItem().withName("Serviços1"),
+                        new PrimaryDrawerItem().withName("Serviços2"),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName("Desenvolvedor"),
                         new PrimaryDrawerItem().withName("Sobre")

@@ -28,7 +28,7 @@ public class ServicosActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(ServicosActivity.this, NewMessageActivity.class));
+                startActivity(new Intent(ServicosActivity.this, ListaSaloesActivity.class));
             }
         });
 
