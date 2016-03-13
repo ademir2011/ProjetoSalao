@@ -6,7 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.onedreams.projetosalao.R;
 
@@ -32,17 +39,27 @@ public class ServicosActivity extends AppCompatActivity {
             }
         });
 
-    }
+        Spinner spLocais = (Spinner) findViewById(R.id.spLocais);
+        List<String> listLocais = new ArrayList<>();
+        listLocais.add("Brazil");
+        listLocais.add("EUA");
+        listLocais.add("China");
+        ArrayAdapter<String> adpt = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, listLocais);
+        adpt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spLocais.setAdapter(adpt);
 
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        spLocais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ServicosActivity.this, ""+ parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+            }
 
-        // Check which checkbox was clicked
-        switch(view.getId()) {
-           // case R.id.
-            // TODO: Veggie sandwich
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
 }

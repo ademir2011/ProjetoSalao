@@ -1,62 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:showIn="@layout/activity_servicos"
     tools:context=".Activities.ServicosActivity">
 
-    <GridLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:rowCount="3"
-        android:orientation="vertical">
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="4dp">
 
-        <CheckBox
-            android:id="@+id/cbColoracao"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Escova"
-            android:onClick="onCheckboxClicked"/>
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <CheckBox
-            android:id="@+id/cbCorteMasculino"
-            android:layout_width="wrap_content"
+            <CheckBox
+                android:id="@+id/cbSexoMasculino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Masculino"/>
+
+            <CheckBox
+                android:id="@+id/cbSexoFeminino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feminino"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="4dp">
+
+        <Spinner
+            android:id="@+id/spLocais"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Corte Masculino"
-            android:onClick="onCheckboxClicked"/>
+            android:gravity="center">
 
-        <CheckBox
-            android:id="@+id/cbCorteFeminino"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Corte Feminino"
-            android:onClick="onCheckboxClicked"/>
+        </Spinner>
 
-        <CheckBox
-            android:id="@+id/cbDesignDeSobrancelhas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Design de Sobrancelhas"
-            android:onClick="onCheckboxClicked"/>
-
-        <CheckBox
-            android:id="@+id/cbEscova"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Escova"
-            android:onClick="onCheckboxClicked"/>
-
-        <CheckBox
-            android:id="@+id/cbMaquiagem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Maquiagem"
-            android:onClick="onCheckboxClicked"/>
-
-    </GridLayout>
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

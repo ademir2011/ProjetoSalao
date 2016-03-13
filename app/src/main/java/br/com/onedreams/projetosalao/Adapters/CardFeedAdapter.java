@@ -43,7 +43,7 @@ public class CardFeedAdapter extends RecyclerView.Adapter<CardFeedAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CardFeed cardFeed = cardFeedList.get(position);
-        holder.tvTeste.setText(cardFeed.getUrlImage());
+        //holder.tvTeste.setText(cardFeed.getUrlImage());
     }
 
     @Override

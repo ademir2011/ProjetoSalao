@@ -96,9 +96,8 @@ public class MainActivity extends AppCompatActivity {
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.drawable.salaobackground)
                 .addProfiles(
-                        new ProfileDrawerItem().withName("Ademir Bezerra").withEmail("exemplo@gmail.com").withIcon(getResources().getDrawable(R.drawable.person))
+                        new ProfileDrawerItem().withName("Ademir Bezerra").withEmail("exemplo@gmail.com").withIcon(getResources().getResourceName(R.drawable.person))
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -106,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
                 })
+                .withTextColorRes(R.color.textColorPrimary)
+                .withHeaderBackground(android.R.color.black)
                 .build();
 
         //create the drawer and remember the `Drawer` result object
