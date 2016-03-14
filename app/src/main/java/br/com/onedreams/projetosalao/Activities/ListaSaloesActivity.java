@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.onedreams.projetosalao.Adapters.CardSaloesAdapter;
+import br.com.onedreams.projetosalao.Classes.Filtro;
 import br.com.onedreams.projetosalao.Classes.SistemaSalaoProfissionalClasses.Salao;
 import br.com.onedreams.projetosalao.DAO.DaoSalao;
 import br.com.onedreams.projetosalao.R;
@@ -46,16 +48,19 @@ public class ListaSaloesActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        populateScreenSaloes();
+        Filtro filtro = (Filtro) getIntent().getSerializableExtra("Filtro");
+
+        /** passar para o parametro do construtor qual deve ser o tipo de busca
+        *   se passar o nome pelo construtor então vai buscar todos os saloes que tem
+        *   aquele nome
+        */
+        populateScreenSaloes(filtro);
 
     }
 
-    private void populateScreenSaloes() {
+    private void populateScreenSaloes(Filtro filtro) {
 
-        //passar para o parametro do construtor qual deve ser o tipo de busca
-        //se passar o nome pelo construtor então vai buscar todos os saloes que tem
-        //aquele nome
-        daoSalao = new DaoSalao();
+        daoSalao = new DaoSalao(filtro);
 
         for (int i = 0; i < daoSalao.getSalaoList().size(); i++)
             cardSaloesList.add(daoSalao.getSalaoList().get(i));

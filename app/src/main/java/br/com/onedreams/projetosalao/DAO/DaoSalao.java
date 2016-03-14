@@ -3,6 +3,7 @@ package br.com.onedreams.projetosalao.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.onedreams.projetosalao.Classes.Filtro;
 import br.com.onedreams.projetosalao.Classes.SistemaSalaoProfissionalClasses.Avaliacao;
 import br.com.onedreams.projetosalao.Classes.SistemaSalaoProfissionalClasses.Comentario;
 import br.com.onedreams.projetosalao.Classes.SistemaSalaoProfissionalClasses.Localizacao;
@@ -17,10 +18,10 @@ public class DaoSalao {
 
     private List<Salao> salaoList;
 
-    public DaoSalao() {
+    public DaoSalao(Filtro filtro) {
 
         salaoList = new ArrayList<>();
-        populateSaloes();
+        populateSaloes(filtro);
 
     }
 
@@ -28,7 +29,7 @@ public class DaoSalao {
      * Responsavel por alimentar o banco, adiciona os saloes
      */
 
-    private void populateSaloes() {
+    private void populateSaloes(Filtro filtro) {
 
         List<Comentario> comentarioList = new ArrayList<>();
         comentarioList.add(new Comentario("","",""));
@@ -42,22 +43,26 @@ public class DaoSalao {
                                 12,
                                 telefoneList));
 
-
-
-        salaoList.add(new Salao("Salao cole kie",
+        Salao salaoUm = new Salao("Salao cole kie",
                                 "231.312.312/12312",
                                 new Avaliacao(123,3213,5, comentarioList),
                                 telefoneList,
-                                new Localizacao("kkk","RN","natal","ponta negra","roberto freire","31","ap401s",-5.880498,-35.284280),
-                                profissionalList));
+                                new Localizacao("kkk","Bahia","natal","ponta negra","roberto freire","31","ap401s",-5.880498,-35.284280),
+                                profissionalList);
 
-        salaoList.add(new Salao("Salao cole kie2",
+        Salao salaoDois = new Salao("Salao cole kie2",
                 "231.312.312/12312",
                 new Avaliacao(123,3213,5, comentarioList),
                 telefoneList,
-                new Localizacao("kkk","RN","natal","ponta negra","roberto freire","31","ap401s",-5.890498,-35.283280),
-                profissionalList));
+                new Localizacao("kkk","Rio grande do norte","natal","ponta negra","roberto freire","31","ap401s",-5.890498,-35.283280),
+                profissionalList);
 
+        if (salaoUm.getLocalizacao().getEstado().equals(filtro.getEstado())){
+            salaoList.add(salaoUm);
+        }
+        if (salaoDois.getLocalizacao().getEstado().equals(filtro.getEstado())){
+            salaoList.add(salaoDois);
+        }
 
     }
 
