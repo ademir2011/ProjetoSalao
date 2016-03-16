@@ -14,7 +14,7 @@
     android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -23,7 +23,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/salaobackground"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagem do salao" />
 
         <LinearLayout
             android:padding="10dp"
@@ -36,14 +37,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textSize="16sp"
                 android:text="Salao fulaninho de tal"/>
 
-            
+            <TextView
+                android:id="@+id/tvServicos"
+                android:layout_width="wrap_content"
+                android:textSize="12.5sp"
+                android:layout_height="wrap_content"
+                android:text="Serviços:"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/distance"
+                    android:contentDescription="icone distancia" />
+
+                <TextView
+                    android:id="@+id/tvDistance"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distancia:"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/like"
+                    android:contentDescription="icone like" />
+
+                <TextView
+                    android:id="@+id/tvCurtidas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="29 Curtidas"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 </android.support.v7.widget.CardView>

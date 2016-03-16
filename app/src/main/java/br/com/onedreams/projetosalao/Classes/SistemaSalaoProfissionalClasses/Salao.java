@@ -15,6 +15,9 @@ public class Salao {
     private Localizacao localizacao;
     private List<Profissional> profissionalList;
 
+    //variavel temporaria
+    private double distancia;
+
     public Salao(String name, String cnpj, Avaliacao avaliacao, List<Telefone> telefoneList, Localizacao localizacao, List<Profissional> profissionalList) {
         this.name = name;
         this.cnpj = cnpj;
@@ -70,5 +73,13 @@ public class Salao {
 
     public void setProfissionalList(List<Profissional> profissionalList) {
         this.profissionalList = profissionalList;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
     }
 }

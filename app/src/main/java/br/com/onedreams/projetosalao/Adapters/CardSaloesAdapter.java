@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import br.com.onedreams.projetosalao.Classes.SistemaSalaoProfissionalClasses.Salao;
@@ -22,11 +24,13 @@ public class CardSaloesAdapter extends RecyclerView.Adapter<CardSaloesAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivSalao;
         public TextView tvNomeSalao;
+        public TextView tvDistance;
 
         public MyViewHolder(View view) {
             super(view);
             ivSalao = (ImageView) view.findViewById(R.id.ivSalao);
             tvNomeSalao = (TextView) view.findViewById(R.id.tvNomeSalao);
+            tvDistance = (TextView) view.findViewById(R.id.tvDistance);
         }
 
     }
@@ -47,6 +51,13 @@ public class CardSaloesAdapter extends RecyclerView.Adapter<CardSaloesAdapter.My
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Salao salao = cardSaloesList.get(position);
         holder.tvNomeSalao.setText(salao.getName());
+
+        double distanciaDouble = salao.getDistancia();
+
+        String distanciaFormat = String.format("%.3f", distanciaDouble);
+
+        if ( distanciaDouble < 1 ) holder.tvDistance.setText(distanciaFormat+" metros ");
+        else holder.tvDistance.setText(distanciaFormat+" Km ");
     }
 
     @Override

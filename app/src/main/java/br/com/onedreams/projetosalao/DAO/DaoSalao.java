@@ -39,7 +39,7 @@ public class DaoSalao {
 
         List<Profissional> profissionalList = new ArrayList<>();
         profissionalList.add(   new Profissional("Joao",
-                                new Localizacao("brasil","RN","parnamirim","nova parnamirim","robert122reire","21","ap42301s",-5.109498,-35.214280),
+                                new Localizacao("brasil","Rio Grande do Norte","Parnamirim","nova parnamirim","robert122reire","21","ap42301s",-5.109498,-35.214280),
                                 12,
                                 telefoneList));
 
@@ -47,20 +47,22 @@ public class DaoSalao {
                                 "231.312.312/12312",
                                 new Avaliacao(123,3213,5, comentarioList),
                                 telefoneList,
-                                new Localizacao("kkk","Bahia","natal","ponta negra","roberto freire","31","ap401s",-5.880498,-35.284280),
+                                new Localizacao("kkk","Rio Grande do Norte","Parnamirim","ponta negra","roberto freire","31","ap401s",-5.880498,-35.284280),
                                 profissionalList);
 
         Salao salaoDois = new Salao("Salao cole kie2",
                 "231.312.312/12312",
                 new Avaliacao(123,3213,5, comentarioList),
                 telefoneList,
-                new Localizacao("kkk","Rio grande do norte","natal","ponta negra","roberto freire","31","ap401s",-5.890498,-35.283280),
+                new Localizacao("kkk","Rio grande do norte","Natal","ponta negra","roberto freire","31","ap401s",-5.890498,-35.283280),
                 profissionalList);
 
-        if (salaoUm.getLocalizacao().getEstado().equals(filtro.getEstado())){
+
+
+        if (salaoUm.getLocalizacao().getCidade().equals(filtro.getCidade())){
             salaoList.add(salaoUm);
         }
-        if (salaoDois.getLocalizacao().getEstado().equals(filtro.getEstado())){
+        if (salaoDois.getLocalizacao().getCidade().equals(filtro.getCidade())){
             salaoList.add(salaoDois);
         }
 

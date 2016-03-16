@@ -1,13 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".Activities.ServicosActivity"
-    tools:showIn="@layout/activity_servicos">
+    tools:showIn="@layout/activity_servicos"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/textColorPrimary"
+        android:text="Escolha entre serviço ou salões"/>
 
     <RadioGroup
+        android:layout_marginTop="20dp"
+        android:id="@+id/rgServicosSalao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <RadioButton
+            android:textColor="@color/textColorPrimary"
+            android:fontFamily="sans-serif-thin"
+            android:id="@+id/rbServicos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Serviços"/>
+
+        <RadioButton
+            android:textColor="@color/textColorPrimary"
+            android:fontFamily="sans-serif-thin"
+            android:id="@+id/rbSaloes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salões"/>
+
+    </RadioGroup>
+
+    <View
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.35dp"
+        android:alpha="0.5"
+        android:background="@color/textColorPrimary"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/textColorPrimary"
+        android:text="Gênero"/>
+
+    <RadioGroup
+        android:layout_marginTop="20dp"
         android:id="@+id/rgSexo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,12 +69,16 @@
         android:orientation="horizontal">
 
         <RadioButton
+            android:textColor="@color/textColorPrimary"
+            android:fontFamily="sans-serif-thin"
             android:id="@+id/rbSexoMasculino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Masculino" />
 
         <RadioButton
+            android:textColor="@color/textColorPrimary"
+            android:fontFamily="sans-serif-thin"
             android:id="@+id/rbSexoFeminino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,11 +86,30 @@
 
     </RadioGroup>
 
-    <Spinner
-        android:id="@+id/spLocais"
+    <View
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.35dp"
+        android:alpha="0.5"
+        android:background="@color/textColorPrimary"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:textSize="25sp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/textColorPrimary"
+        android:text="Escolha o estado onde você deseja fazer o serviço"/>
+
+    <Spinner
+        android:layout_marginTop="20dp"
+        android:id="@+id/spLocais"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/colorPrimary"
+        android:popupBackground="@color/colorPrimary">
 
     </Spinner>
 

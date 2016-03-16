@@ -1,6 +1,7 @@
 package br.com.onedreams.projetosalao.Activities;
 
 import android.content.Context;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -58,12 +59,39 @@ public class ListaSaloesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método para pegar distancia em metros a partir de dois pontos no mapa
+     * @param oldPositionLatitude
+     * @param oldPositionLongitude
+     * @param newPositionLatitude
+     * @param newPositionLongitude
+     * @return
+     */
+
+    public double getDistanceBetweenLatLong(double oldPositionLatitude, double oldPositionLongitude, double newPositionLatitude, double newPositionLongitude){
+        float[] results = new float[1];
+        Location.distanceBetween(oldPositionLatitude, oldPositionLongitude, newPositionLatitude, newPositionLongitude, results);
+        return (double) results[0];
+    }
+
     private void populateScreenSaloes(Filtro filtro) {
 
         daoSalao = new DaoSalao(filtro);
 
-        for (int i = 0; i < daoSalao.getSalaoList().size(); i++)
+        for (int i = 0; i < daoSalao.getSalaoList().size(); i++){
+
+            double distancia = getDistanceBetweenLatLong(   filtro.getLatitude(),
+                                                            filtro.getLongitude(),
+                                                            daoSalao.getSalaoList().get(i).getLocalizacao().getLatitude(),
+                                                            daoSalao.getSalaoList().get(i).getLocalizacao().getLongitude());
+
+            // Valor da distancia em km
+            distancia /= 1000;
+
+            daoSalao.getSalaoList().get(i).setDistancia( distancia );
             cardSaloesList.add(daoSalao.getSalaoList().get(i));
+
+        }
 
         mAdapter.notifyDataSetChanged();
 

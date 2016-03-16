@@ -9,14 +9,18 @@ public class Filtro implements Serializable {
 
     private boolean masculino;
     private boolean feminino;
-    private String estado;
+    private String cidade;
+    private double latitude;
+    private double longitude;
 
     public Filtro(){}
 
-    public Filtro(boolean masculino, boolean feminino, String estado) {
+    public Filtro(boolean masculino, boolean feminino, String cidade, double latitude, double longitude) {
         this.masculino = masculino;
         this.feminino = feminino;
-        this.estado = estado;
+        this.cidade = cidade;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public boolean isMasculino() {
@@ -35,11 +39,28 @@ public class Filtro implements Serializable {
         this.feminino = feminino;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
 }
