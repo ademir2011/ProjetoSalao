@@ -1,6 +1,8 @@
 package br.com.onedreams.projetosalao.Activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.pdf.PdfDocument;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,6 +59,27 @@ public class ListaSaloesActivity extends AppCompatActivity {
         */
         populateScreenSaloes(filtro);
 
+        recycleviewListener();
+
+    }
+
+    /**
+     * Método que espera os eventos relacionados a recycleview
+     */
+
+    private void recycleviewListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getApplicationContext(), PageActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     /**
@@ -106,9 +129,9 @@ public class ListaSaloesActivity extends AppCompatActivity {
     public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
-        private MainActivity.ClickListener clickListener;
+        private ListaSaloesActivity.ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final MainActivity.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ListaSaloesActivity.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

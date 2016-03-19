@@ -1,13 +1,11 @@
 package br.com.onedreams.projetosalao.Activities;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,57 +14,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.GeoDataApi;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.Places;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import br.com.onedreams.projetosalao.Classes.Filtro;
-import br.com.onedreams.projetosalao.Classes.SistemaSalaoProfissionalClasses.Servicos;
 import br.com.onedreams.projetosalao.R;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class ServicosActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private Toolbar toolbar;
-    RequestQueue requestQueue;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.spLocais)
     Spinner spLocais;
+    @Bind(R.id.rgSexo)
     RadioGroup rgSexo;
+    @Bind(R.id.rbSexoMasculino)
     RadioButton rbSexoMasculino;
+    @Bind(R.id.rbSexoFeminino)
     RadioButton rbSexoFeminino;
+
     Filtro filtro;
     private GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
@@ -75,21 +56,15 @@ public class ServicosActivity extends AppCompatActivity implements GoogleApiClie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servicos);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        spLocais = (Spinner) findViewById(R.id.spLocais);
-
-        filtro = new Filtro();
+        ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        filtro = new Filtro();
+
         floatingactionbuttoninit();
         spinnerListener();
-
-        rgSexo = (RadioGroup) findViewById(R.id.rgSexo);
-        rbSexoMasculino = (RadioButton) findViewById(R.id.rbSexoMasculino);
-        rbSexoFeminino = (RadioButton) findViewById(R.id.rbSexoFeminino);
 
         rgSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -102,8 +77,10 @@ public class ServicosActivity extends AppCompatActivity implements GoogleApiClie
         });
 
         buildGoogleApiClient();
-        
-        if (mGoogleApiClient != null) { mGoogleApiClient.connect(); }
+
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
 
     }
 
@@ -118,7 +95,7 @@ public class ServicosActivity extends AppCompatActivity implements GoogleApiClie
     }
 
     /**
-     * Desconecta o google api client 
+     * Desconecta o google api client
      */
 
     @Override
@@ -147,6 +124,7 @@ public class ServicosActivity extends AppCompatActivity implements GoogleApiClie
 
     /**
      * Adiciona itens ao componente spinner
+     *
      * @param spinner
      * @param itens
      */
@@ -186,11 +164,14 @@ public class ServicosActivity extends AppCompatActivity implements GoogleApiClie
 
     /**
      * Quando o google api cliente é conectado o método abaixo é chamado
+     *
      * @param bundle
      */
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+
+        Log.e("teste", "entrou");
 
         //checa compatibilidade
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -203,14 +184,17 @@ public class ServicosActivity extends AppCompatActivity implements GoogleApiClie
         //armazena no objeto address informações de localização dada latitude e longitude
         Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
         List<Address> address = null;
-        try { address = geoCoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1); } catch (Exception ignored) {}
+        try {
+            address = geoCoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+        } catch (Exception ignored) {
+        }
 
         //seta latitude e longitude no filtro
         filtro.setLatitude(mLastLocation.getLatitude());
         filtro.setLongitude(mLastLocation.getLongitude());
 
         //pega a cidade atual do objeto address
-        String cidadeAtual = address.get(0).getAddressLine(2);
+        String cidadeAtual = address.get(0).getAddressLine(1);
 
         //popula o sppiner com a cidade atual
         if (mLastLocation != null) {
@@ -223,10 +207,13 @@ public class ServicosActivity extends AppCompatActivity implements GoogleApiClie
     }
 
     @Override
-    public void onConnectionSuspended(int i) {}
+    public void onConnectionSuspended(int i) {
+    }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Toast.makeText(this, connectionResult.toString(), Toast.LENGTH_LONG).show();
+    }
 
     /**
      * Constroi a google api client

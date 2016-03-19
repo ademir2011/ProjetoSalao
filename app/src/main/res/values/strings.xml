@@ -22,4 +22,7 @@
     <string name="title_friends">Friends</string>
     <string name="title_home">Home</string>
 
+    <string name="google_app_id">10095783483</string>
+    <string name="google_api_key">AIzaSyCkRGuji4QEF7X4Ad-MDELjNUi8ej6RsQQ</string>
+
 </resources>

@@ -43,28 +43,16 @@ public class DaoSalao {
                                 12,
                                 telefoneList));
 
-        Salao salaoUm = new Salao("Salao cole kie",
-                                "231.312.312/12312",
-                                new Avaliacao(123,3213,5, comentarioList),
-                                telefoneList,
-                                new Localizacao("kkk","Rio Grande do Norte","Parnamirim","ponta negra","roberto freire","31","ap401s",-5.880498,-35.284280),
-                                profissionalList);
 
-        Salao salaoDois = new Salao("Salao cole kie2",
-                "231.312.312/12312",
-                new Avaliacao(123,3213,5, comentarioList),
-                telefoneList,
-                new Localizacao("kkk","Rio grande do norte","Natal","ponta negra","roberto freire","31","ap401s",-5.890498,-35.283280),
-                profissionalList);
-
-
-
-        if (salaoUm.getLocalizacao().getCidade().equals(filtro.getCidade())){
-            salaoList.add(salaoUm);
+        for(int i = 0; i < 100; i++){
+            salaoList.add(new Salao("Salao cole kie2",
+                    "231.312.312/12312",
+                    new Avaliacao(123,3213,5, comentarioList),
+                    telefoneList,
+                    new Localizacao("kkk","Rio grande do norte","Natal - RN","ponta negra","roberto freire","31","ap401s",-5.890498,-35.283280),
+                    profissionalList));
         }
-        if (salaoDois.getLocalizacao().getCidade().equals(filtro.getCidade())){
-            salaoList.add(salaoDois);
-        }
+
 
     }
 

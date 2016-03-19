@@ -26,16 +26,17 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile 'com.android.support:cardview-v7:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
-    compile('com.github.afollestad.material-dialogs:core:0.8.5.6@aar') {
-        transitive = true
-    }
-    compile('com.github.afollestad.material-dialogs:commons:0.8.5.6@aar') {
-        transitive = true
-    }
     compile('com.mikepenz:materialdrawer:5.1.2@aar') {
         transitive = true
     }
+    //biblioteca para facilitar o envio e recebimento de arquivos json
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'net.steamcrafted:materialiconlib:1.0.9'
+    //biblioteca do google api para pegar localização
     compile 'com.google.android.gms:play-services:8.4.0'
+    //infejeção de dependencia
+    compile 'com.jakewharton:butterknife:7.0.1'
+    //biblioteca para arredondar imagens
+    compile 'com.makeramen:roundedimageview:2.2.1'
+
 }
