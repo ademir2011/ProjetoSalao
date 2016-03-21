@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.MainActivity">
+    tools:context="br.com.onedreams.projetosalao.Activities.SingUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,10 +12,10 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarSingUp"
             layout="@layout/toolbar" />
 
-        <include layout="@layout/content_main" />
+        <include layout="@layout/content_sing_up" />
 
     </LinearLayout>
 

@@ -19,11 +19,13 @@ public class CardFeedAdapter extends RecyclerView.Adapter<CardFeedAdapter.MyView
     private List<CardFeed> cardFeedList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvTeste;
+        public TextView tvNomeDoComentaristaCardFeed;
+        public TextView tvMensagemDoComentaristaCardFeed;
 
         public MyViewHolder(View view) {
             super(view);
-            tvTeste = (TextView) view.findViewById(R.id.tvTeste);
+            tvNomeDoComentaristaCardFeed = (TextView) view.findViewById(R.id.tvNomeDoComentaristaCardFeed);
+            tvMensagemDoComentaristaCardFeed = (TextView) view.findViewById(R.id.tvMensagemDoComentaristaCardFeed);
         }
 
     }
@@ -43,7 +45,8 @@ public class CardFeedAdapter extends RecyclerView.Adapter<CardFeedAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CardFeed cardFeed = cardFeedList.get(position);
-        //holder.tvTeste.setText(cardFeed.getUrlImage());
+        holder.tvNomeDoComentaristaCardFeed.setText(cardFeed.getmNomeDoComentarista());
+        holder.tvMensagemDoComentaristaCardFeed.setText(cardFeed.getmMensagemDoComentarista());
     }
 
     @Override

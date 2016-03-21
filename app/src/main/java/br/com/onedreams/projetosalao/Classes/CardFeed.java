@@ -6,37 +6,27 @@ package br.com.onedreams.projetosalao.Classes;
  */
 public class CardFeed {
 
-    private String urlImage;
-    private int qtdLike;
-    private int qtdComment;
+    private String mNomeDoComentarista;
+    private String mMensagemDoComentarista;
 
-    public CardFeed(String urlImage, int qtdLike, int qtdComment) {
-        this.urlImage = urlImage;
-        this.qtdLike = qtdLike;
-        this.qtdComment = qtdComment;
+    public CardFeed(String mNomeDoComentarista, String mMensagemDoComentarista) {
+        this.mNomeDoComentarista = mNomeDoComentarista;
+        this.mMensagemDoComentarista = mMensagemDoComentarista;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public String getmNomeDoComentarista() {
+        return mNomeDoComentarista;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setmNomeDoComentarista(String mNomeDoComentarista) {
+        this.mNomeDoComentarista = mNomeDoComentarista;
     }
 
-    public int getQtdComment() {
-        return qtdComment;
+    public String getmMensagemDoComentarista() {
+        return mMensagemDoComentarista;
     }
 
-    public void setQtdComment(int qtdComment) {
-        this.qtdComment = qtdComment;
-    }
-
-    public int getQtdLike() {
-        return qtdLike;
-    }
-
-    public void setQtdLike(int qtdLike) {
-        this.qtdLike = qtdLike;
+    public void setmMensagemDoComentarista(String mMensagemDoComentarista) {
+        this.mMensagemDoComentarista = mMensagemDoComentarista;
     }
 }

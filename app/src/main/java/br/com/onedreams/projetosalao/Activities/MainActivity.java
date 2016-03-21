@@ -2,26 +2,28 @@ package br.com.onedreams.projetosalao.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.firebase.ui.FirebaseListAdapter;
+import com.firebase.ui.FirebaseRecyclerAdapter;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -29,12 +31,15 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.com.onedreams.projetosalao.Adapters.CardFeedAdapter;
 import br.com.onedreams.projetosalao.Classes.CardFeed;
@@ -47,11 +52,20 @@ public class MainActivity extends AppCompatActivity {
     private CardFeedAdapter mAdapter;
     private Toolbar toolbar;
 
+    Firebase mRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Firebase.setAndroidContext(this);
+        mRef = new Firebase("https://bookbeauty.firebaseio.com/postagem");
+        Map<String, Object> map = new HashMap<>();
+        CardFeed cardFeed = new CardFeed("teste","teste2");
+        map.put("mNomeDoComentarista",cardFeed.getmNomeDoComentarista());
+        map.put("mMensagemDoComentarista",cardFeed.getmMensagemDoComentarista());
+        mRef.push().setValue(map);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -59,11 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new CardFeedAdapter(cardFeedList);
+        //mAdapter = new CardFeedAdapter(cardFeedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+        //recyclerView.setAdapter(mAdapter);
 
         populateFeed();
         createNavigationDrawer();
@@ -72,12 +86,44 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseRecyclerAdapter<CardFeed, ChatMessageViewHolder> adapter =
+                new FirebaseRecyclerAdapter<CardFeed, ChatMessageViewHolder>(
+                        CardFeed.class,
+                        R.layout.card_feed_row,
+                        ChatMessageViewHolder.class,
+                        mRef
+                ) {
+                    @Override
+                    protected void populateViewHolder(ChatMessageViewHolder chatMessageViewHolder, CardFeed cardFeed, int i) {
+                        chatMessageViewHolder.tvNomeDoComentaristaCardFeed.setText(cardFeed.getmNomeDoComentarista());
+                        chatMessageViewHolder.tvMensagemDoComentaristaCardFeed.setText(cardFeed.getmMensagemDoComentarista());
+                    }
+                };
+
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    public static class ChatMessageViewHolder extends RecyclerView.ViewHolder {
+        TextView tvNomeDoComentaristaCardFeed;
+        TextView tvMensagemDoComentaristaCardFeed;
+
+        public ChatMessageViewHolder(View itemView) {
+            super(itemView);
+            tvNomeDoComentaristaCardFeed = (TextView) itemView.findViewById(R.id.tvNomeDoComentaristaCardFeed);
+            tvMensagemDoComentaristaCardFeed = (TextView) itemView.findViewById(R.id.tvMensagemDoComentaristaCardFeed);
+        }
+    }
+
     private void managerClick() {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                CardFeed cardFeed = cardFeedList.get(position);
-                Toast.makeText(getApplicationContext(), " Clicou ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), " Clicou "+position, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -140,18 +186,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateFeed() {
-        cardFeedList.add(new CardFeed("teste",2,2));
-        cardFeedList.add(new CardFeed("te2ste",2,2));
-        cardFeedList.add(new CardFeed("tes34te",2,2));
-        cardFeedList.add(new CardFeed("1d12d22",2,2));
-        cardFeedList.add(new CardFeed("tesdc34te",2,2));
-        cardFeedList.add(new CardFeed("1d12d22",2,2));
-        cardFeedList.add(new CardFeed("ted12s34te",2,2));
-        cardFeedList.add(new CardFeed("1c1c22",2,2));
-        cardFeedList.add(new CardFeed("1c1c22",2,2));
-        cardFeedList.add(new CardFeed("1c1c22",2,2));
 
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
