@@ -5,18 +5,6 @@
     android:layout_height="match_parent"
     tools:context="br.com.onedreams.projetosalao.Activities.SingUpActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
-
-        <include
-            android:id="@+id/toolbarSingUp"
-            layout="@layout/toolbar" />
-
-        <include layout="@layout/content_sing_up" />
-
-    </LinearLayout>
+    <include layout="@layout/content_sing_up" />
 
 </RelativeLayout>

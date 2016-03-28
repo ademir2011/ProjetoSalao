@@ -5,9 +5,10 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/idItemSettingsTela1"
-        android:title="@string/action_settings"
+        android:id="@+id/idLogout"
+        android:title="Deslogar"
         android:orderInCategory="100"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
         app:showAsAction="never" />
 
 </menu>

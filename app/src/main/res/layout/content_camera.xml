@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_camera"
+    tools:context=".Activities.CameraActivity">
+
+    <ImageView
+        android:id="@+id/ivBackgroundCamera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.25"
+        android:background="@drawable/testebackgroundnavigation"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilLegendCamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Titulo da foto"
+                android:textAppearance="@style/editTextInputLayoutstyle"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:layout_below="@+id/tilLegendCamera"
+            android:id="@+id/ivImageCamera"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/testebackgroundnavigation"
+            android:scaleType="centerInside" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

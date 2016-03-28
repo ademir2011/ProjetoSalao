@@ -1,98 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_gravity="center"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="4dp"
     android:layout_margin="5dp"
-    card_view:contentPadding="10dp"
     card_view:cardUseCompatPadding="true"
     android:foreground="?android:attr/selectableItemBackground">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/person"/>
-
-            <TextView
-                android:id="@+id/tvNomeDoComentaristaCardFeed"
-                android:padding="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Joao da silva bezerra"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvMensagemDoComentaristaCardFeed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Maquiagem feita no salao do beto"/>
-
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/ivCardFeed"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
             android:scaleType="centerCrop"
             android:src="@drawable/testeimagemtrabalho"/>
 
-        <LinearLayout
-            android:padding="10dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rlPersonCardFeed"
+            android:layout_below="@+id/ivCardFeed"
+            android:padding="5dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ivPersonCardFeed"
+                android:src="@drawable/person"
+                android:scaleType="centerCrop"
+                app:riv_corner_radius="50dip"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:layout_alignTop="@+id/ivPersonCardFeed"
+                android:layout_toRightOf="@+id/ivPersonCardFeed"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/tvNomeDoComentaristaCardFeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="#90000000"
+                android:fontFamily="casual"
+                android:text="Joao da silva bezerra"/>
+
+            <TextView
+                android:layout_alignBottom="@+id/ivPersonCardFeed"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/ivPersonCardFeed"
+                android:layout_below="@+id/tvNomeDoComentaristaCardFeed"
+                android:id="@+id/tvDateCardFeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8.5sp"
+                android:text="Há 1 hora"
+                android:textColor="#60000000"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/approval_96"/>
+
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/tvMensagemDoComentaristaCardFeed"
+                android:layout_toRightOf="@+id/ivPersonCardFeed"
+                android:layout_below="@+id/tvDateCardFeed"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12.5sp"
+                android:text="Maquiagem feita no salao do beto"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/rlPersonCardFeed"
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="#203F51B5"
+            android:gravity="center_horizontal">
 
             <ImageView
-                android:layout_gravity="center"
-                android:src="@drawable/like"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:id="@+id/iconLikeCardFeed"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/like_filled_96"/>
 
             <TextView
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iconLikeCardFeed"
                 android:layout_gravity="center"
-                android:id="@+id/tvTeste"
-                android:textSize="20sp"
+                android:id="@+id/tvLikeCardFeed"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:text="223 Likes"
                 android:textStyle="bold"
-                android:text="Curtir"
-                android:fontFamily="sans-serif-thin"
-                android:layout_alignParentTop="true"
+                android:fontFamily="casual"
+                android:textColor="@color/colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <ImageView
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/comment"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"/>
+            <View
+                android:id="@+id/viewCardFeed"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tvLikeCardFeed"
+                android:layout_width="0.20dp"
+                android:layout_height="24dp"
+                android:background="@color/colorAccent" />
+
+            <com.mikepenz.iconics.view.IconicsImageView
+                android:id="@+id/iconCommentCardFeed"
+                android:layout_toRightOf="@+id/viewCardFeed"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/comments_96"/>
 
             <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/tvCommentCardFeed"
+                android:layout_toRightOf="@+id/iconCommentCardFeed"
                 android:layout_gravity="center"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                android:text="Comentar"
-                android:fontFamily="sans-serif-thin"
-                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:text="234 Comentários"
+                android:fontFamily="casual"
+                android:textColor="@color/colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

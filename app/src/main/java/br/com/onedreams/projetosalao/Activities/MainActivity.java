@@ -2,7 +2,13 @@ package br.com.onedreams.projetosalao.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +30,9 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.firebase.ui.FirebaseListAdapter;
 import com.firebase.ui.FirebaseRecyclerAdapter;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.context.IconicsContextWrapper;
+import com.mikepenz.iconics.context.IconicsLayoutInflater;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -31,6 +40,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -43,7 +53,10 @@ import java.util.Map;
 
 import br.com.onedreams.projetosalao.Adapters.CardFeedAdapter;
 import br.com.onedreams.projetosalao.Classes.CardFeed;
+import br.com.onedreams.projetosalao.Classes.LibraryClass;
 import br.com.onedreams.projetosalao.R;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,20 +65,28 @@ public class MainActivity extends AppCompatActivity {
     private CardFeedAdapter mAdapter;
     private Toolbar toolbar;
 
-    Firebase mRef;
+    Firebase firebase = LibraryClass.getFirebase();
+
+    @Bind(R.id.fabMain)
+    FloatingActionButton fabMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Firebase.setAndroidContext(this);
+        ButterKnife.bind(this);
+
+        listenerFabMain();
+
+        /*Firebase.setAndroidContext(this);
         mRef = new Firebase("https://bookbeauty.firebaseio.com/postagem");
         Map<String, Object> map = new HashMap<>();
         CardFeed cardFeed = new CardFeed("teste","teste2");
         map.put("mNomeDoComentarista",cardFeed.getmNomeDoComentarista());
         map.put("mMensagemDoComentarista",cardFeed.getmMensagemDoComentarista());
-        mRef.push().setValue(map);
+        mRef.push().setValue(map);*/
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -73,24 +94,37 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        //mAdapter = new CardFeedAdapter(cardFeedList);
+        mAdapter = new CardFeedAdapter(cardFeedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);
 
-        populateFeed();
+        cardFeedList.add( new CardFeed("Joao ferreira", "Trabalho excelente feito por eu, no salão Mega Hair, estou esperando a presença de todos !!!! venham !!!!"));
+        cardFeedList.add( new CardFeed("Luiza bernembaut", "Mais um trabalho finalizado !! Lindo, maravilhoso"));
+        cardFeedList.add( new CardFeed("Odebratch silva", "Esse trabalho foi feita no salão do tio alvo"));
+        mAdapter.notifyDataSetChanged();
+
         createNavigationDrawer();
         managerClick();
 
 
     }
 
+    private void listenerFabMain() {
+        fabMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CameraActivity.class));
+            }
+        });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerAdapter<CardFeed, ChatMessageViewHolder> adapter =
+        /*FirebaseRecyclerAdapter<CardFeed, ChatMessageViewHolder> adapter =
                 new FirebaseRecyclerAdapter<CardFeed, ChatMessageViewHolder>(
                         CardFeed.class,
                         R.layout.card_feed_row,
@@ -104,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
 
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);*/
 
     }
 
@@ -145,9 +179,10 @@ public class MainActivity extends AppCompatActivity {
                 .addProfiles(
                         new ProfileDrawerItem()
                                 .withName("Ademir Bezerra")
-                                .withEmail("exemplo@gmail.com")
                                 .withIcon(getResources().getDrawable(R.drawable.person))
                 )
+                .withDividerBelowHeader(false)
+                .withProfileImagesVisible(true)
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
@@ -155,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .withTextColorRes(R.color.textColorPrimary)
-                .withHeaderBackground(R.drawable.testebackgroundnavigation)
+                .withHeaderBackground(R.color.colorAccent)
                 .build();
 
         //create the drawer and remember the `Drawer` result object
@@ -165,12 +200,41 @@ public class MainActivity extends AppCompatActivity {
                 .withAccountHeader(headerResult)
                 .withTranslucentStatusBar(true)
                 .withActionBarDrawerToggle(true)
+                .withSliderBackgroundColorRes(R.color.colorAccent)
+                .withSelectedItem(-1)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Serviços1"),
-                        new PrimaryDrawerItem().withName("Serviços2"),
-                        new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("Desenvolvedor"),
-                        new PrimaryDrawerItem().withName("Sobre")
+                        new PrimaryDrawerItem()
+                                .withName("Buscar Serviços")
+                                .withTextColorRes(R.color.textColorPrimary)
+                                .withIcon(GoogleMaterial.Icon.gmd_content_cut)
+                                .withIconColorRes(R.color.textColorPrimary)
+                                .withSelectedColor(Color.argb(40, 0, 0, 0))
+                                .withSelectedIconColorRes(R.color.colorAccent)
+                                .withSelectedTextColorRes(R.color.colorAccent),
+                        new PrimaryDrawerItem()
+                                .withName("Desenvolvedores")
+                                .withTextColorRes(R.color.textColorPrimary)
+                                .withIcon(GoogleMaterial.Icon.gmd_people)
+                                .withIconColorRes(R.color.textColorPrimary)
+                                .withSelectedColor(Color.argb(40, 0, 0, 0))
+                                .withSelectedIconColorRes(R.color.colorAccent)
+                                .withSelectedTextColorRes(R.color.colorAccent),
+                        new PrimaryDrawerItem()
+                                .withName("Help")
+                                .withTextColorRes(R.color.textColorPrimary)
+                                .withIcon(GoogleMaterial.Icon.gmd_error_outline)
+                                .withIconColorRes(R.color.textColorPrimary)
+                                .withSelectedColor(Color.argb(40, 0, 0, 0))
+                                .withSelectedIconColorRes(R.color.colorAccent)
+                                .withSelectedTextColorRes(R.color.colorAccent),
+                        new PrimaryDrawerItem()
+                                .withName("Sobre")
+                                .withTextColorRes(R.color.textColorPrimary)
+                                .withIcon(GoogleMaterial.Icon.gmd_phone_android)
+                                .withIconColorRes(R.color.textColorPrimary)
+                                .withSelectedColor(Color.argb(40, 0, 0, 0))
+                                .withSelectedIconColorRes(R.color.colorAccent)
+                                .withSelectedTextColorRes(R.color.colorAccent)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -185,10 +249,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
     }
 
-    private void populateFeed() {
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -200,7 +260,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.idItemSettingsTela1: return true;
+            case R.id.idLogout:
+                firebase.unauth();
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
         }
 
         return super.onOptionsItemSelected(item);

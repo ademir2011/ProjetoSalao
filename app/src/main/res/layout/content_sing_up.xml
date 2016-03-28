@@ -1,75 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/gradiant"
+tools:context=".Activities.SingUpActivity"
+tools:showIn="@layout/activity_sing_up">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:padding="@dimen/material_drawer_padding"
-    tools:context=".Activities.SingUpActivity"
-    tools:showIn="@layout/activity_sing_up">
+    android:gravity="center"
+    android:paddingLeft="60dp"
+    android:paddingRight="60dp">
+
 
     <LinearLayout
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:maxLines="1"
-                android:inputType="textEmailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:textAppearance="@style/editTextInputLayoutstyle"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:maxLines="1"
-                android:inputType="textPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Senha"
-                android:textAppearance="@style/editTextInputLayoutstyle"/>
-
-        </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/btVoltarSingUp"
-                android:layout_marginRight="2.5dp"
-                android:layout_weight="1"
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/layerem"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:id="@+id/etEmailSingUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Voltar"
-                android:background="#3000"
-                android:textAppearance="@style/buttonTextStyle"/>
-
-            <Button
-                android:id="@+id/btCadastrarSingUp"
-                android:layout_marginLeft="2.5dp"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cadastrar"
-                android:background="#3000"
-                android:textAppearance="@style/buttonTextStyle"/>
+                android:hint="Email Address"
+                android:textColorHint="#d9e5f3"
+                android:layout_marginLeft="15dp"
+                android:background="#00000000"
+                android:textSize="16dp"
+                android:inputType="text"
+                android:textColor="#fff"/>
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4a5a71"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/layeru"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
+                android:textColorHint="#d9e5f3"
+                android:layout_marginLeft="15dp"
+                android:background="#00000000"
+                android:textSize="16dp"
+                android:inputType="text"
+                android:textColor="#fff"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4a5a71"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/layer0"
+                android:layout_gravity="center"/>
+
+
+            <EditText
+                android:id="@+id/etSenhaSingUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:textColorHint="#d9e5f3"
+                android:layout_marginLeft="15dp"
+                android:background="#00000000"
+                android:inputType="textPassword"
+                android:textSize="16dp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4a5a71"></LinearLayout>
+
     </LinearLayout>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="60dp"
+    android:paddingRight="60dp"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:layout_marginBottom="20dp">
+
+    <Button
+        android:id="@+id/btCadastrarSingUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="SING UP"
+        android:textColor="#d9e5f3"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:padding="16dp"
+        android:layout_marginBottom="50dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Você já tem uma conta ?"
+            android:textColor="@color/colorAccent"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:id="@+id/btVoltarSingUp"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="Voltar"
+            android:background="#3000"
+            android:textSize="10sp"
+            android:textColor="@color/colorAccent"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginBottom="400dp">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:src="@drawable/logo_app"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbSingUp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
 </RelativeLayout>
